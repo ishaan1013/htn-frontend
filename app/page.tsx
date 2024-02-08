@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main className="w-screen flex justify-center">
-      <div className="w-full max-w-screen-lg p-6 flex flex-col items-start justify-start">
+      <div className="w-full max-w-screen-md p-6 flex flex-col items-start justify-start">
         <UnderlinedText className="text-3xl font-semibold">
           Events
         </UnderlinedText>

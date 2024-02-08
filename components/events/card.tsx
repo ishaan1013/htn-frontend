@@ -5,6 +5,21 @@ import { Globe, Lock } from "lucide-react"
 import { Card } from "../ui/card"
 
 export default function EventCard({ event }: { event: TEvent }) {
+  const date = new Date(event.start_time).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  })
+
+  const start = new Date(event.start_time).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  })
+
+  const end = new Date(event.end_time).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  })
+
   return (
     <Card className="py-4 pl-6 relative overflow-hidden z-0">
       <EventCardGlow type={event.event_type} />
@@ -16,6 +31,10 @@ export default function EventCard({ event }: { event: TEvent }) {
         ) : (
           <Globe className="h-4 w-4 text-muted-foreground ml-2" />
         )}
+      </div>
+
+      <div>
+        {date} {start}-{end}
       </div>
     </Card>
   )
