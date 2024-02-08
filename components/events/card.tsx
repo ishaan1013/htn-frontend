@@ -1,8 +1,7 @@
 "use client"
 
 import { TEvent, TEventType } from "@/lib/types"
-import { Globe, Lock } from "lucide-react"
-import { Card } from "../ui/card"
+import { Badge } from "@/components/ui/badge"
 
 export default function EventCard({ event }: { event: TEvent }) {
   const date = new Date(event.start_time).toLocaleDateString("en-US", {
@@ -21,22 +20,46 @@ export default function EventCard({ event }: { event: TEvent }) {
   })
 
   return (
-    <Card className="py-4 pl-6 relative overflow-hidden z-0">
+    <div className="p-4 pl-6 cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm">
       <EventCardGlow type={event.event_type} />
 
-      <div className="font-semibold text-lg flex items-center">
-        {event.name}
-        {event.permission && event.permission === "private" ? (
-          <Lock className="h-4 w-4 text-muted-foreground ml-2" />
-        ) : (
-          <Globe className="h-4 w-4 text-muted-foreground ml-2" />
-        )}
+      <div className="font-semibold text-xl">{event.name}</div>
+
+      <div className="flex flex-wrap w-full mt-2">
+        <EventTypeBadge type={event.event_type} />
+        <Badge
+          variant="outline"
+          className="text-muted-foreground font-medium mr-2"
+        >
+          {date} {start}-{end}
+        </Badge>
       </div>
 
-      <div>
-        {date} {start}-{end}
-      </div>
-    </Card>
+      {/* {event.description ? (
+        <div className="mt-6 text-muted-foreground">{event.description}</div>
+      ) : null} */}
+    </div>
+  )
+}
+
+function EventTypeBadge({ type }: { type: TEventType }) {
+  return (
+    <Badge
+      variant="outline"
+      className={`${
+        type === "tech_talk"
+          ? "border-accent-blue text-accent-blue"
+          : type === "workshop"
+          ? "border-accent-pink text-accent-pink"
+          : "border-accent-yellow text-accent-yellow"
+      } font-medium mr-2`}
+    >
+      {type === "tech_talk"
+        ? "Tech Talk"
+        : type === "workshop"
+        ? "Workshop"
+        : "Activity"}
+    </Badge>
   )
 }
 
@@ -53,7 +76,7 @@ function EventCardGlow({ type }: { type: TEventType }) {
         } h-full top-0 z-10`}
       />
       <div
-        className={`absolute left-0 w-2 ${
+        className={`absolute -left-1 w-2 group-hover:w-4 duration-300 ${
           type === "tech_talk"
             ? "bg-accent-blue"
             : type === "workshop"
