@@ -1,12 +1,27 @@
-import Image from "next/image"
+import UnderlinedText from "@/components/ui/underlinedText"
+import { TEvent } from "@/lib/types"
+import { getData } from "@/lib/utils"
+import EventCard from "@/components/events/card"
+import Filters from "@/components/events/filters"
 
-export default function Home() {
+export default async function Home() {
+  const data: TEvent[] = await getData()
+
   return (
     <main className="w-screen flex justify-center">
-      <div className="w-full max-w-screen-lg p-6 flex items-center justify-between">
-        <div className="text-3xl font-semibold relative z-0">
+      <div className="w-full max-w-screen-lg p-6 flex flex-col items-start justify-start">
+        <UnderlinedText className="text-3xl font-semibold">
           Events
-          <div className="w-full -z-10 absolute -bottom-1 h-1 bg-gradient" />
+        </UnderlinedText>
+
+        <Filters />
+
+        <div className="h-[1px] w-full bg-border my-8" />
+
+        <div className="w-full space-y-4">
+          {data.map((event) => (
+            <EventCard event={event} key={event.id} />
+          ))}
         </div>
       </div>
     </main>

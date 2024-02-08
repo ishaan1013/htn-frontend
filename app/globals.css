@@ -4,6 +4,11 @@
  
 @layer base {
   :root {
+
+    --accent-blue: 218.97 100% 65.88%;
+    --accent-pink: 311.75 98.95% 62.55%;
+    --accent-yellow:44.25 90.91% 65.49%;
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -36,6 +41,11 @@
   }
  
   .dark {
+
+    --accent-blue: 218.97 100% 65.88%;
+    --accent-pink: 311.75 98.95% 62.55%;
+    --accent-yellow:44.25 90.91% 65.49%;
+
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
  
@@ -77,5 +87,5 @@
 
 .bg-gradient {
   background: rgb(24,250,255);
-  background: linear-gradient(135deg, rgba(24,250,255,1) 0%, rgba(81,142,255,1) 23%, rgba(182,70,254,1) 42%, rgba(254,65,217,1) 53%, rgba(247,205,87,1) 74%, rgba(242,164,74,1) 93%);
+  background: linear-gradient(135deg, rgba(24,250,255,1) 0%, rgba(81,142,255,1) 23%, #b646fe 42%, rgba(254,65,217,1) 53%, rgba(247,205,87,1) 74%, rgba(242,164,74,1) 93%);
 }
