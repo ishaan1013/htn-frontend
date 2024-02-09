@@ -1,7 +1,6 @@
 "use client"
 
 import { Input } from "@/components/ui/input"
-
 import {
   Select,
   SelectContent,
@@ -9,15 +8,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 import { Search } from "lucide-react"
-import { useState } from "react"
 import { Button } from "../ui/button"
+import { TEventType } from "@/lib/types"
 
-export default function Filters() {
-  const [search, setSearch] = useState("")
-  const [type, setType] = useState("all")
-
+export default function Filters({
+  search,
+  setSearch,
+  type,
+  setType,
+}: {
+  search: string
+  setSearch: (value: string) => void
+  type: string
+  setType: (value: "all" | TEventType) => void
+}) {
   return (
     <div className="flex md:flex-row w-full flex-col space-y-2 md:space-y-0 mt-4 md:space-x-4">
       <div className="md:w-96 w-full relative z-0">
@@ -41,7 +46,14 @@ export default function Filters() {
             <SelectItem value="workshop">Workshop</SelectItem>
           </SelectContent>
         </Select>
-        <Button disabled={!search && type === "all"} variant="outline">
+        <Button
+          onClick={() => {
+            setSearch("")
+            setType("all")
+          }}
+          disabled={!search && type === "all"}
+          variant="outline"
+        >
           Clear Filters
         </Button>
       </div>

@@ -1,8 +1,7 @@
 import UnderlinedText from "@/components/ui/underlinedText"
 import { TEvent } from "@/lib/types"
 import { getData } from "@/lib/utils"
-import EventCard from "@/components/events/card"
-import Filters from "@/components/events/filters"
+import Events from "@/components/events"
 
 export default async function Home() {
   const data: TEvent[] = await getData()
@@ -14,15 +13,7 @@ export default async function Home() {
           Events
         </UnderlinedText>
 
-        <Filters />
-
-        <div className="h-[1px] w-full bg-border my-8" />
-
-        <div className="w-full space-y-4">
-          {data.map((event) => (
-            <EventCard event={event} key={event.id} />
-          ))}
-        </div>
+        <Events data={data} />
       </div>
     </main>
   )

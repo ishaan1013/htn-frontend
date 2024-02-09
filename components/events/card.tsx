@@ -2,25 +2,28 @@
 
 import { TEvent, TEventType } from "@/lib/types"
 import { Badge } from "@/components/ui/badge"
+import { processDate } from "@/lib/utils"
+import EventTypeBadge from "./typeBadge"
 
-export default function EventCard({ event }: { event: TEvent }) {
-  const date = new Date(event.start_time).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-  })
-
-  const start = new Date(event.start_time).toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  })
-
-  const end = new Date(event.end_time).toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  })
+export default function EventCard({
+  event,
+  setSelected,
+  setOpen,
+}: {
+  event: TEvent
+  setSelected: (value: number) => void
+  setOpen: (value: boolean) => void
+}) {
+  const { date, start, end } = processDate(event)
 
   return (
-    <div className="p-4 pl-6 cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm">
+    <button
+      onClick={() => {
+        setSelected(event.id)
+        setOpen(true)
+      }}
+      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 p-4 pl-6 w-full text-left cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm"
+    >
       <EventCardGlow type={event.event_type} />
 
       <div className="font-semibold text-xl">{event.name}</div>
@@ -38,28 +41,7 @@ export default function EventCard({ event }: { event: TEvent }) {
       {/* {event.description ? (
         <div className="mt-6 text-muted-foreground">{event.description}</div>
       ) : null} */}
-    </div>
-  )
-}
-
-function EventTypeBadge({ type }: { type: TEventType }) {
-  return (
-    <Badge
-      variant="outline"
-      className={`${
-        type === "tech_talk"
-          ? "border-accent-blue text-accent-blue"
-          : type === "workshop"
-          ? "border-accent-pink text-accent-pink"
-          : "border-accent-yellow text-accent-yellow"
-      } font-medium mr-2`}
-    >
-      {type === "tech_talk"
-        ? "Tech Talk"
-        : type === "workshop"
-        ? "Workshop"
-        : "Activity"}
-    </Badge>
+    </button>
   )
 }
 
