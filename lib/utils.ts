@@ -55,3 +55,14 @@ export const processDate = (event: TEvent) => {
 
   return { date, start, end }
 }
+
+export const validateLogin = (values: {
+  [x: string]: any
+  email?: string | undefined
+  password?: any
+}) => {
+  return (
+    values.email === "admin@hackthenorth.com" &&
+    values.password === "hackthenorth2024"
+  )
+}

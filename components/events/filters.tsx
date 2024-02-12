@@ -36,7 +36,7 @@ export default function Filters({
       </div>
       <div className="flex space-x-2 md:space-x-4">
         <Select value={type} onValueChange={setType}>
-          <SelectTrigger className="grow font-medium">
+          <SelectTrigger className="grow md:w-[130px] font-medium">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

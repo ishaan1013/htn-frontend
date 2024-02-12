@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Schibsted_Grotesk } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import NavBar from "@/components/layout/NavBar"
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Ishaan's frontend take-home assignment for HTN.",
 }
 
-const fontSans = Inter({
+export const fontSans = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 })
@@ -22,12 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
+      <body className={fontSans.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

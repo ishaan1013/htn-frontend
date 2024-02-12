@@ -1,4 +1,4 @@
-import UnderlinedText from "@/components/ui/underlinedText"
+import UnderlinedText from "@/components/ui/underlined-text"
 import { TEvent } from "@/lib/types"
 import { getData } from "@/lib/utils"
 import Events from "@/components/events"
