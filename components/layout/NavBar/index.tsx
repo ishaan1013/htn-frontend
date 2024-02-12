@@ -6,7 +6,7 @@ import Logo from "@/assets/logo.svg"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { Loader2 } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import LogOutAlert from "./LogOutAlert"
 
 export default function NavBar() {
@@ -14,6 +14,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     console.log("Checking if signed in")
@@ -23,6 +24,7 @@ export default function NavBar() {
   const handleSignOut = () => {
     localStorage.removeItem("signedIn")
     setSignedIn(false)
+    router.refresh()
   }
 
   return (

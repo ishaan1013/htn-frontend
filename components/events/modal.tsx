@@ -12,8 +12,7 @@ import { TEvent, TEventType } from "@/lib/types"
 import { processDate } from "@/lib/utils"
 import EventTypeBadge from "./typeBadge"
 import { Badge } from "../ui/badge"
-import { ExternalLink } from "lucide-react"
-import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function EventModal({
   event,
@@ -41,15 +40,51 @@ export default function EventModal({
               <EventTypeBadge type={event.event_type} />
               <Badge
                 variant="outline"
-                className="text-muted-foreground font-medium mr-2"
+                className="text-muted-foreground font-medium mr-2 mb-2"
               >
                 {date} {start}-{end}
               </Badge>
+              <Badge
+                variant="outline"
+                className="text-muted-foreground font-medium mr-2 mb-2"
+              >
+                {event.permission === "private" ? "Private" : "Public"}
+              </Badge>
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
               {event.description || "No description available."}
             </div>
-            <div className="w-full h-[1px] bg-border my-6" />
+            <div className="w-full h-[1px] bg-border my-4" />
+            {event.speakers.length > 0 ? (
+              <div className="">
+                <div className="text-lg font-semibold mb-2 text-foreground">
+                  Speakers
+                </div>
+                {event.speakers.map((speaker) => (
+                  <div className="flex items-center justify-start space-x-2">
+                    <Avatar>
+                      <AvatarFallback>{speaker.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div>{speaker.name}</div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            {event.speakers.length > 0 ? (
+              <div className="">
+                <div className="text-lg font-semibold mb-2 text-foreground">
+                  Related Events
+                </div>
+                {event.speakers.map((speaker) => (
+                  <div className="flex items-center justify-start space-x-2">
+                    <Avatar>
+                      <AvatarFallback>{speaker.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div>{speaker.name}</div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

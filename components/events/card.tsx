@@ -22,7 +22,7 @@ export default function EventCard({
         setSelected(event.id)
         setOpen(true)
       }}
-      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 p-4 pl-6 w-full text-left cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm"
+      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pt-4 pr-4 pb-2 pl-6 w-full text-left cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm"
     >
       <EventCardGlow type={event.event_type} />
 
@@ -32,9 +32,15 @@ export default function EventCard({
         <EventTypeBadge type={event.event_type} />
         <Badge
           variant="outline"
-          className="text-muted-foreground font-medium mr-2"
+          className="text-muted-foreground font-medium mr-2 mb-2"
         >
           {date} {start}-{end}
+        </Badge>
+        <Badge
+          variant="outline"
+          className="text-muted-foreground font-medium mr-2 mb-2"
+        >
+          {event.permission === "private" ? "Private" : "Public"}
         </Badge>
       </div>
 

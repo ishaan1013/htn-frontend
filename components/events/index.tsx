@@ -11,7 +11,9 @@ export default function Events({ data }: { data: TEvent[] }) {
   const [search, setSearch] = useState("")
   const [type, setType] = useState<"all" | TEventType>("all")
 
-  const filteredData = filterData(data, search, type)
+  const signedIn = !!localStorage.getItem("signedIn")
+
+  const filteredData = filterData(data, search, type, signedIn)
 
   const [selected, setSelected] = useState(1)
   const [open, setOpen] = useState(false)

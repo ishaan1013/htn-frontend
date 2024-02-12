@@ -13,7 +13,7 @@ export default function EventTypeBadge({ type }: { type: TEventType }) {
           : type === "workshop"
           ? "border-accent-pink text-accent-pink"
           : "border-accent-yellow text-accent-yellow"
-      } font-medium mr-2`}
+      } font-medium mr-2 mb-2`}
     >
       {type === "tech_talk"
         ? "Tech Talk"

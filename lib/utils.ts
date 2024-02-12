@@ -26,13 +26,18 @@ export const colorMap = {
 export const filterData = (
   data: TEvent[],
   search: string,
-  type: TEventType | "all"
+  type: TEventType | "all",
+  signedIn: boolean
 ) => {
+  console.log("filtering with: ", search, type, signedIn)
+
   if (type !== "all") data = data.filter((event) => event.event_type === type)
   if (search)
     data = data.filter((event) =>
       event.name.toLowerCase().includes(search.toLowerCase())
     )
+
+  if (!signedIn) data = data.filter((event) => event.permission === "public")
 
   return data
 }
