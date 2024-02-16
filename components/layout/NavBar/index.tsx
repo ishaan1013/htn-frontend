@@ -28,9 +28,7 @@ export default function NavBar() {
     }
     setSignedIn(false)
 
-    setTimeout(() => {
-      router.refresh()
-    }, 500)
+    router.refresh()
   }
 
   return (

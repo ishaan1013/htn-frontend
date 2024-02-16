@@ -34,18 +34,18 @@ export default function Filters({
           placeholder="Search events..."
         />
       </div>
-      <div className="flex space-x-2 md:space-x-4">
-        <Select value={type} onValueChange={setType}>
-          <SelectTrigger className="grow md:w-[130px] font-medium">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="activity">Activity</SelectItem>
-            <SelectItem value="tech_talk">Tech Talk</SelectItem>
-            <SelectItem value="workshop">Workshop</SelectItem>
-          </SelectContent>
-        </Select>
+      <Select value={type} onValueChange={setType}>
+        <SelectTrigger className="grow md:w-[130px] font-medium">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Types</SelectItem>
+          <SelectItem value="activity">Activity</SelectItem>
+          <SelectItem value="tech_talk">Tech Talk</SelectItem>
+          <SelectItem value="workshop">Workshop</SelectItem>
+        </SelectContent>
+      </Select>
+      <div className="grid md:w-auto w-full grid-cols-2 gap-2 md:gap-4">
         <Button
           onClick={() => {
             setSearch("")
@@ -53,8 +53,16 @@ export default function Filters({
           }}
           disabled={!search && type === "all"}
           variant="outline"
+          className="md:w-auto w-full"
         >
           Clear Filters
+        </Button>
+        <Button
+          onClick={() => {}}
+          variant="outline"
+          className="md:w-auto w-full"
+        >
+          Reset Sort
         </Button>
       </div>
     </div>

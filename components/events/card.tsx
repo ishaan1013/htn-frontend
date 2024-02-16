@@ -4,52 +4,75 @@ import { TEvent, TEventType } from "@/lib/types"
 import { Badge } from "@/components/ui/badge"
 import { processDate } from "@/lib/utils"
 import EventTypeBadge from "./typeBadge"
+import { forwardRef } from "react"
 
-export default function EventCard({
-  event,
-  setSelected,
-  setOpen,
-}: {
+interface EventCardProps {
   event: TEvent
   setSelected: (value: number) => void
   setOpen: (value: boolean) => void
-}) {
-  const { date, start, end } = processDate(event)
+  active?: boolean
+  style?: React.CSSProperties
+}
 
-  return (
-    <button
-      onClick={() => {
-        setSelected(event.id)
-        setOpen(true)
-      }}
-      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pt-4 pr-4 pb-2 pl-6 w-full text-left cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group hover:bg-muted-foreground/5 duration-200 text-card-foreground shadow-sm"
-    >
-      <EventCardGlow type={event.event_type} />
+const EventCard = forwardRef<HTMLDivElement, EventCardProps>(
+  ({ event, setSelected, setOpen, active, style, ...props }, ref) => {
+    const { date, start, end } = processDate(event)
 
-      <div className="font-semibold text-xl">{event.name}</div>
+    if (active)
+      return (
+        <div
+          ref={ref}
+          style={style}
+          {...props}
+          onClick={() => {
+            setSelected(event.id)
+            setOpen(true)
+          }}
+          tabIndex={0}
+          className={`
+          w-full rounded-lg border-2 border-dashed h-[90px] bg-card shadow-sm`}
+        ></div>
+      )
 
-      <div className="flex flex-wrap w-full mt-2">
-        <EventTypeBadge type={event.event_type} />
-        <Badge
-          variant="outline"
-          className="text-muted-foreground font-medium mr-2 mb-2"
-        >
-          {date} {start}-{end}
-        </Badge>
-        <Badge
-          variant="outline"
-          className="text-muted-foreground font-medium mr-2 mb-2"
-        >
-          {event.permission === "private" ? "Private" : "Public"}
-        </Badge>
-      </div>
+    return (
+      <div
+        ref={ref}
+        style={style}
+        {...props}
+        onClick={() => {
+          setSelected(event.id)
+          setOpen(true)
+        }}
+        tabIndex={0}
+        className={`focus-visible:outline-none touch-pan-y focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pt-4 pr-4 pb-2 pl-6 w-full text-left cursor-pointer relative overflow-hidden z-0 rounded-lg border bg-card group text-card-foreground shadow-sm`}
+      >
+        <EventCardGlow type={event.event_type} />
 
-      {/* {event.description ? (
+        <div className="font-semibold text-xl">{event.name}</div>
+
+        <div className="flex flex-wrap w-full mt-2">
+          <EventTypeBadge type={event.event_type} />
+          <Badge
+            variant="outline"
+            className="text-muted-foreground font-medium mr-2 mb-2"
+          >
+            {date} {start}-{end}
+          </Badge>
+          <Badge
+            variant="outline"
+            className="text-muted-foreground font-medium mr-2 mb-2"
+          >
+            {event.permission === "private" ? "Private" : "Public"}
+          </Badge>
+        </div>
+
+        {/* {event.description ? (
         <div className="mt-6 text-muted-foreground">{event.description}</div>
       ) : null} */}
-    </button>
-  )
-}
+      </div>
+    )
+  }
+)
 
 function EventCardGlow({ type }: { type: TEventType }) {
   return (
@@ -64,7 +87,7 @@ function EventCardGlow({ type }: { type: TEventType }) {
         } h-full top-0 z-10`}
       />
       <div
-        className={`absolute -left-1 w-2 group-hover:w-4 duration-300 ${
+        className={`absolute -left-1 group-hover:-left-3 w-2 group-hover:w-6 duration-300 ${
           type === "tech_talk"
             ? "bg-accent-blue"
             : type === "workshop"
@@ -75,3 +98,5 @@ function EventCardGlow({ type }: { type: TEventType }) {
     </>
   )
 }
+
+export default EventCard
