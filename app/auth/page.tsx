@@ -44,7 +44,10 @@ export default function AuthPage() {
     if (!valid) {
       setInvalid(true)
     } else {
-      localStorage.setItem("signedIn", "true")
+      if (typeof window !== "undefined") {
+        localStorage.setItem("signedIn", "true")
+      }
+
       router.push("/")
     }
   }

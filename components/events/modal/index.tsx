@@ -6,22 +6,28 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import { TEvent, TEventType } from "@/lib/types"
 import { processDate } from "@/lib/utils"
-import EventTypeBadge from "./typeBadge"
-import { Badge } from "../ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import EventTypeBadge from "../typeBadge"
+import { Badge } from "@/components/ui/badge"
+import { ArrowUpRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import EventSpeakers from "./speakers"
+import EventLinks from "./links"
 
 export default function EventModal({
+  events,
   event,
   open,
   setOpen,
+  setEvent,
 }: {
+  events: TEvent[]
   event: TEvent
   open: boolean
   setOpen: (value: boolean) => void
+  setEvent: (value: number) => void
 }) {
   const { date, start, end } = processDate(event)
 
@@ -31,9 +37,6 @@ export default function EventModal({
         <DialogHeader>
           <DialogTitle className="text-xl flex items-center">
             {event.name}
-            {/* <a href={event.private_url}>
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </a> */}
           </DialogTitle>
           <DialogDescription>
             <div className="flex flex-wrap w-full">
@@ -54,35 +57,39 @@ export default function EventModal({
             <div className="mt-4">
               {event.description || "No description available."}
             </div>
+
+            <EventLinks event={event} />
+
             <div className="w-full h-[1px] bg-border my-4" />
-            {event.speakers.length > 0 ? (
+
+            <EventSpeakers event={event} />
+
+            {event.related_events.length > 0 ? (
               <div className="">
-                <div className="text-lg font-semibold mb-2 text-foreground">
-                  Speakers
-                </div>
-                {event.speakers.map((speaker) => (
-                  <div className="flex items-center justify-start space-x-2">
-                    <Avatar>
-                      <AvatarFallback>{speaker.name[0]}</AvatarFallback>
-                    </Avatar>
-                    <div>{speaker.name}</div>
-                  </div>
-                ))}
-              </div>
-            ) : null}
-            {event.speakers.length > 0 ? (
-              <div className="">
-                <div className="text-lg font-semibold mb-2 text-foreground">
+                <div className="text-lg font-semibold text-foreground">
                   Related Events
                 </div>
-                {event.speakers.map((speaker) => (
-                  <div className="flex items-center justify-start space-x-2">
-                    <Avatar>
-                      <AvatarFallback>{speaker.name[0]}</AvatarFallback>
-                    </Avatar>
-                    <div>{speaker.name}</div>
-                  </div>
-                ))}
+                {event.related_events.map((eventId, i) => {
+                  const relatedEvent = events.find((e) => eventId === e.id)
+                  if (!relatedEvent) return null
+                  return (
+                    <Button
+                      onClick={() => setEvent(eventId)}
+                      variant="link"
+                      key={i}
+                      className={`${
+                        relatedEvent.event_type === "tech_talk"
+                          ? "text-accent-blue"
+                          : relatedEvent.event_type === "workshop"
+                          ? "text-accent-pink"
+                          : "text-accent-yellow"
+                      } m-0 p-0 mt-2 flex h-auto items-center`}
+                    >
+                      {relatedEvent.name}
+                      <ArrowUpRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  )
+                })}
               </div>
             ) : null}
           </DialogDescription>

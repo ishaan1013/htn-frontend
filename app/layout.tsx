@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Ishaan's frontend take-home assignment for HTN.",
 }
 
-export const fontSans = Schibsted_Grotesk({
+const fontSans = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 })

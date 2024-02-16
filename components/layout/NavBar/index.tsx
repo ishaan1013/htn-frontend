@@ -17,12 +17,15 @@ export default function NavBar() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log("Checking if signed in")
-    setSignedIn(!!localStorage.getItem("signedIn"))
+    if (typeof window !== "undefined") {
+      setSignedIn(!!localStorage.getItem("signedIn"))
+    }
   }, [pathname])
 
   const handleSignOut = () => {
-    localStorage.removeItem("signedIn")
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("signedIn")
+    }
     setSignedIn(false)
     router.refresh()
   }

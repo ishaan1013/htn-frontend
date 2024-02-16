@@ -29,8 +29,6 @@ export const filterData = (
   type: TEventType | "all",
   signedIn: boolean
 ) => {
-  console.log("filtering with: ", search, type, signedIn)
-
   if (type !== "all") data = data.filter((event) => event.event_type === type)
   if (search)
     data = data.filter((event) =>

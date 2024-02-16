@@ -11,7 +11,8 @@ export default function Events({ data }: { data: TEvent[] }) {
   const [search, setSearch] = useState("")
   const [type, setType] = useState<"all" | TEventType>("all")
 
-  const signedIn = !!localStorage.getItem("signedIn")
+  const signedIn =
+    typeof window !== "undefined" ? !!localStorage.getItem("signedIn") : false
 
   const filteredData = filterData(data, search, type, signedIn)
 
@@ -21,9 +22,11 @@ export default function Events({ data }: { data: TEvent[] }) {
   return (
     <>
       <EventModal
+        events={data}
         event={data.find((e) => e.id === selected) as TEvent}
         open={open}
         setOpen={setOpen}
+        setEvent={setSelected}
       />
 
       <Filters
