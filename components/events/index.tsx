@@ -1,23 +1,37 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import EventCard from "./card"
 import Filters from "./filters"
 import { TEvent, TEventType } from "@/lib/types"
 import { filterData } from "@/lib/utils"
 import EventModal from "./modal"
+import { Loader2 } from "lucide-react"
 
 export default function Events({ data }: { data: TEvent[] }) {
   const [search, setSearch] = useState("")
   const [type, setType] = useState<"all" | TEventType>("all")
 
-  const signedIn =
-    typeof window !== "undefined" ? !!localStorage.getItem("signedIn") : false
+  const [signedIn, setSignedIn] = useState<undefined | boolean>(undefined)
 
-  const filteredData = filterData(data, search, type, signedIn)
+  useEffect(() => {
+    setSignedIn(
+      typeof window !== "undefined" ? !!localStorage.getItem("signedIn") : false
+    )
+  }, [])
+
+  const filteredData =
+    signedIn !== undefined ? filterData(data, search, type, signedIn) : []
 
   const [selected, setSelected] = useState(1)
   const [open, setOpen] = useState(false)
+
+  if (signedIn === undefined)
+    return (
+      <div className="w-full flex items-center pt-12 justify-center">
+        <Loader2 className="animate-spin text-muted-foreground w-6 h-6" />
+      </div>
+    )
 
   return (
     <>

@@ -27,7 +27,10 @@ export default function NavBar() {
       localStorage.removeItem("signedIn")
     }
     setSignedIn(false)
-    router.refresh()
+
+    setTimeout(() => {
+      router.refresh()
+    }, 500)
   }
 
   return (
