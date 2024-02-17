@@ -50,6 +50,10 @@ export default function Events({ data }: { data: TEvent[] }) {
   const [selected, setSelected] = useState(1)
   const [open, setOpen] = useState(false)
 
+  const resetSort = () => {
+    setFilteredData(filterData(data, search, type, !!signedIn))
+  }
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -108,6 +112,7 @@ export default function Events({ data }: { data: TEvent[] }) {
         setSearch={setSearch}
         type={type}
         setType={setType}
+        resetSort={resetSort}
       />
 
       <div className="h-[1px] w-full bg-border my-8" />

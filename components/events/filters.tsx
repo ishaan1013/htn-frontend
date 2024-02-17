@@ -17,11 +17,13 @@ export default function Filters({
   setSearch,
   type,
   setType,
+  resetSort,
 }: {
   search: string
   setSearch: (value: string) => void
   type: string
   setType: (value: "all" | TEventType) => void
+  resetSort: () => void
 }) {
   return (
     <div className="flex md:flex-row w-full flex-col space-y-2 md:space-y-0 mt-4 md:space-x-4">
@@ -58,7 +60,9 @@ export default function Filters({
           Clear Filters
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            resetSort()
+          }}
           variant="outline"
           className="md:w-auto w-full"
         >

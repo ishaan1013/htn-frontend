@@ -5,9 +5,9 @@ import Link from "next/link"
 import Logo from "@/assets/logo.svg"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
-import { Loader2 } from "lucide-react"
+import { Loader2, LogIn, LogOut } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
-import LogOutAlert from "./LogOutAlert"
+import LogOutAlert from "./logOutAlert"
 
 export default function NavBar() {
   const [signedIn, setSignedIn] = useState<null | boolean>(null)
@@ -48,10 +48,14 @@ export default function NavBar() {
           ) : signedIn ? (
             <Button onClick={() => setIsOpen(true)} variant="outline">
               Log Out
+              <LogOut className="w-4 h-4 ml-2" />
             </Button>
           ) : (
             <Link href="/auth">
-              <Button variant="outline">Sign In</Button>
+              <Button variant="outline">
+                Sign In
+                <LogIn className="w-4 h-4 ml-2" />
+              </Button>
             </Link>
           )}
         </nav>

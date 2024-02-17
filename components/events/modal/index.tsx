@@ -31,11 +31,14 @@ export default function EventModal({
 }) {
   const { date, start, end } = processDate(event)
 
+  const showSpeakers = event.speakers.length > 0
+  const showRelatedEvents = event.related_events.length > 0
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-screen-sm pb-8">
         <DialogHeader>
-          <DialogTitle className="text-xl flex items-center">
+          <DialogTitle className="text-xl flex text-left items-center">
             {event.name}
           </DialogTitle>
           <DialogDescription>
@@ -54,19 +57,21 @@ export default function EventModal({
                 {event.permission === "private" ? "Private" : "Public"}
               </Badge>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 text-left">
               {event.description || "No description available."}
             </div>
 
             <EventLinks event={event} />
 
-            <div className="w-full h-[1px] bg-border my-4" />
+            {showSpeakers || showRelatedEvents ? (
+              <div className="w-full h-[1px] bg-border my-4" />
+            ) : null}
 
-            <EventSpeakers event={event} />
+            {showSpeakers ? <EventSpeakers event={event} /> : null}
 
-            {event.related_events.length > 0 ? (
+            {showRelatedEvents ? (
               <div className="">
-                <div className="text-lg font-semibold text-foreground">
+                <div className="text-lg text-left font-semibold text-foreground">
                   Related Events
                 </div>
                 {event.related_events.map((eventId, i) => {

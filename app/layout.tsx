@@ -4,6 +4,7 @@ import "./globals.css"
 import { cn } from "@/lib/utils"
 import NavBar from "@/components/layout/NavBar"
 import { ThemeProvider } from "@/components/layout/ThemeProvider"
+import Footer from "@/components/layout/footer"
 
 export const metadata: Metadata = {
   title: "Hack the North",
@@ -31,6 +32,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
