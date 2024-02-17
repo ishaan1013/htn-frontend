@@ -2,7 +2,7 @@ import UnderlinedText from "@/components/ui/underlined-text"
 import { TEvent } from "@/lib/types"
 import { getData } from "@/lib/utils"
 import Events from "@/components/events"
-import Footer from "@/components/layout/Footer"
+import Footer from "@/components/layout/footer"
 
 export default async function Home() {
   const data: TEvent[] = await getData()
