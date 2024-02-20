@@ -86,20 +86,12 @@ export default function AuthPage() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <div className="w-full relative">
-                      <Input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="********"
-                        {...field}
-                        className="pr-8"
-                      />
-                      <button
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute text-muted-foreground top-2.5 right-2.5 w-5 h-5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      >
-                        <Eye className="w-full h-full" />
-                      </button>
-                    </div>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="********"
+                      {...field}
+                      className="pr-8"
+                    />
                   </FormControl>
                   <FormDescription className="select-none">
                     Test value:{" "}

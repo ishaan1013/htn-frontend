@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Schibsted_Grotesk } from "next/font/google"
 import "./globals.css"
-import { cn } from "@/lib/utils"
 import NavBar from "@/components/layout/navbar"
 import { ThemeProvider } from "@/components/layout/ThemeProvider"
 import Footer from "@/components/layout/footer"
