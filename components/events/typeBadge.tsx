@@ -3,6 +3,7 @@
 import { TEventType } from "@/lib/types"
 import { Badge } from "../ui/badge"
 
+// colour-coded badge for event type
 export default function EventTypeBadge({ type }: { type: TEventType }) {
   return (
     <Badge

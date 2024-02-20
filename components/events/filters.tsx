@@ -12,6 +12,7 @@ import { Search } from "lucide-react"
 import { Button } from "../ui/button"
 import { TEventType } from "@/lib/types"
 
+// filtering ui with state controls passed in as props
 export default function Filters({
   search,
   setSearch,

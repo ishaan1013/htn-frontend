@@ -10,11 +10,13 @@ export const metadata: Metadata = {
   description: "Ishaan's frontend take-home assignment for HTN.",
 }
 
+// font variable
 const fontSans = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
+// root layout
 export default function RootLayout({
   children,
 }: Readonly<{

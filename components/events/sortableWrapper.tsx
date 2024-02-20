@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities"
 import EventCard from "./card"
 import { TEvent } from "@/lib/types"
 
+// dnd-kit utils for implementing sortable event cards
 export function SortableItem({
   event,
   setSelected,

@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import EventCard from "./card"
 import Filters from "./filters"
 import { TEvent, TEventType } from "@/lib/types"
@@ -31,10 +31,13 @@ import {
   restrictToParentElement,
 } from "@dnd-kit/modifiers"
 
+// main events component containing all interactivity
+// takes event array as props
 export default function Events({ data }: { data: TEvent[] }) {
   const [search, setSearch] = useState("")
   const [type, setType] = useState<"all" | TEventType>("all")
 
+  // local-storage based auth
   const [signedIn, setSignedIn] = useState<undefined | boolean>(undefined)
 
   useEffect(() => {
@@ -54,6 +57,7 @@ export default function Events({ data }: { data: TEvent[] }) {
     setFilteredData(filterData(data, search, type, !!signedIn))
   }
 
+  // dnd-kit utils
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -90,6 +94,7 @@ export default function Events({ data }: { data: TEvent[] }) {
     setActiveId(-1)
   }
 
+  // loading state
   if (signedIn === undefined)
     return (
       <div className="w-full flex items-center pt-12 justify-center">
