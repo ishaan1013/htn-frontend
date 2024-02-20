@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider"
 import Footer from "@/components/layout/footer"
 
 export const metadata: Metadata = {
-  title: "Hack the North",
+  title: "Hackathon Global Inc.",
   description: "Ishaan's frontend take-home assignment for HTN.",
 }
 
