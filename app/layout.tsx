@@ -29,9 +29,11 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <NavBar />
-          {children}
-          <Footer />
+          <div className="min-h-screen relative">
+            <NavBar />
+            {children}
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

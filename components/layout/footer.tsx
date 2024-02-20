@@ -5,8 +5,8 @@ import { Button } from "../ui/button"
 
 export default function Footer() {
   return (
-    <div className="w-screen border-t border-border mt-12 flex select-none justify-center">
-      <nav className="w-full max-w-screen-md p-6 flex items-center justify-between">
+    <div className="w-screen absolute bottom-0 border-t border-border flex select-none justify-center">
+      <footer className="w-full max-w-screen-md p-6 flex items-center justify-between">
         <Link href="/" className="w-10 h-10">
           <Image alt="Logo" src={Logo} height={40} width={40} />
         </Link>
@@ -22,7 +22,7 @@ export default function Footer() {
             GitHub Repo
           </Button>
         </a>
-      </nav>
+      </footer>
     </div>
   )
 }
