@@ -36,7 +36,7 @@ export default function EventModal({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-w-screen-sm pb-8">
+      <DialogContent className="max-w-screen-sm max-h-[60vh] overflow-y-auto pb-8">
         <DialogHeader>
           <DialogTitle className="text-xl flex text-left items-center">
             {event.name}
