@@ -1,4 +1,4 @@
-# Hack the North Frontend
+# *Hackathon Global Inc.* Frontend
 
 <img width="1427" alt="image" src="https://github.com/ishaan1013/htn-frontend/assets/69771365/1902c705-3106-4847-91e6-8857ca2c905f">
 
